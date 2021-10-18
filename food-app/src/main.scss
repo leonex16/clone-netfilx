@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
+
+// Colors by https://darker.vercel.app
+$primary-100 : #cececf;
+$primary-200 : #9d9d9e;
+$primary-300 : #6c6b6e;
+$primary-400 : #1f1f1f;
+$primary-500 : #0a090d;
+$primary-600 : #08070a;
+$primary-700 : #060508;
+$primary-800 : #040405;
+$primary-900 : #020203;
+
+$secondary-100 : #fcd0d4;
+$secondary-200 : #faa1a8;
+$secondary-300 : #f7717d;
+$secondary-400 : #f54251;
+$secondary-500 : #f21326;
+$secondary-600 : #c20f1e;
+$secondary-700 : #910b17;
+$secondary-800 : #61080f;
+$secondary-900 : #300408;
+
+$yellow-100 : #fcf1ce;
+$yellow-200 : #fae39e;
+$yellow-300 : #f7d56d;
+$yellow-400 : #f5c73d;
+$yellow-500 : #f2b90c;
+$yellow-600 : #c2940a;
+$yellow-700 : #916f07;
+$yellow-800 : #614a05;
+$yellow-900 : #302502;
+
+$orange-100 : #fcdfcd;
+$orange-200 : #fabe9c;
+$orange-300 : #f79e6a;
+$orange-400 : #f57d39;
+$orange-500 : #f25d07;
+$orange-600 : #c24a06;
+$orange-700 : #913804;
+$orange-800 : #612503;
+$orange-900 : #301301;
+
+$text-color-primary--disabled : hsl(0, 0%, 50%);
+$text-color-primary--hover    : hsl(0, 0%, 65%);
+$text-color-primary           : hsl(0, 0%, 80%);
+$text-color-primary--active   : hsl(0, 0%, 96%);
+
+$text-color-secondary--disabled : hsl(0, 0%, 50%);
+$text-color-secondary--hover    : hsl(0, 0%, 65%);
+$text-color-secondary           : hsl(0, 0%, 80%);
+$text-color-secondary--active   : hsl(0, 0%, 96%);
+
+// Box Model
+$margin              : 1rem;
+$padding             : 1rem;
+$max-width-container : 1280px;
+
+// Mixins
+@mixin b {
+    border: 2px solid #fff;
+}
+
+@mixin transition( $property,  $duration: .2s ) {
+  transition-property: $property;
+  transition-duration: $duration;
+  transition-timing-function: linear;
+}
+
+* {
+  border         : 0;
+  outline        : 0;
+  padding        : 0;
+  margin         : 0;
+  vertical-align : baseline;
+  box-sizing     : border-box;
+  font-weight    : inherit;
+  font-family    : 'Nunito', sans-serif;
+  font-style     : inherit;
+  font-size      : 100%;
+  user-select    : none;
+}
+
+body {
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    background-color: $primary-500;
+    width: 5px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: red;
+    border-radius: 20px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+}

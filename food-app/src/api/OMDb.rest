@@ -1,0 +1,5 @@
+
+@API_KEY = be3d4c70
+@ID = tt3896198
+
+GET http://www.omdbapi.com?apikey={{API_KEY}}&type=series&s=tes&page=1

@@ -1,0 +1,8 @@
+@LANG = en
+@API_KEY = k_q9d0azct
+
+### MostPopularTVs
+GET https://imdb-api.com/{{LANG}}/API/MostPopularTVs/{{API_KEY}}
+
+### MostPopularMovies
+GET https://imdb-api.com/{{LANG}}/API/MostPopularMovies/{{API_KEY}}
