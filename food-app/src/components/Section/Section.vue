@@ -1,38 +1,43 @@
 <template>
   <section class="main-section-container">
     <header class="section-nav-container">
-      <Nav :links="links"/>
+      <Nav :links="navElements"/>
       <FilterGenre />
     </header>
     <div class="section-body-container">
-      <PostCard />
+        <Carousel v-if="mountPostOnCarousel" :posts="data"/>
+      <div class="section-body-container__post" v-else >
+        <PostCard v-for="post in posts" :key="post" :post="post" />
+      </div>
     </div>
-  </section>
+  </section>  
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 import { PropsNav } from "../../shared/interfaces/Props";
-import Nav from './components/Nav.vue';
-import FilterGenre from './components/FilterGenre.vue';
-import PostCard from '../PostCard.vue';
+import { IMDBTitle } from "../../shared/interfaces/IMDbTitle";
+import PostCard from "../PostCard.vue";
+import Nav from "./components/Nav.vue";
+import Carousel from "../Carousel/Carousel.vue";
+import FilterGenre from "./components/FilterGenre.vue";
 
 export default defineComponent({
   name: "Section",
+  props: {
+    navElements: { type: Object as PropType<PropsNav[]> },
+    posts: { type: Object as PropType<IMDBTitle[]> },
+    mountPostOnCarousel: { type: Boolean }
+  },
   components: {
     Nav,
     FilterGenre,
+    Carousel,
     PostCard
   },
   data() {
-    const links: PropsNav[] = [
-      { icon: 'trending_up', label: 'Trends Now' },
-      { icon: 'local_fire_department', label: 'Popular' },
-      { icon: 'star', label: 'Premieres' },
-      { icon: 'add', label: 'Recently Added' },
-    ];
-
-    return {links}
+    const { navElements, posts, mountPostOnCarousel } = this;
+    return { navElements, posts, mountPostOnCarousel }
   }
 });
 </script>
@@ -41,15 +46,19 @@ export default defineComponent({
 @import "../../main.scss";
 
 .main-section-container {
-
-}
+  }
 .section-nav-container {
+  & > * {
+    margin: $margin auto;
+  }
 
 }
 .section-body-container {
-  margin: $margin auto;
-  margin-bottom: 0;
-  max-width: $max-width-container;
-  background-color: red;
+  margin: $margin * 2 auto;
+
+}
+
+.section-body-container__posts {
+
 }
 </style>

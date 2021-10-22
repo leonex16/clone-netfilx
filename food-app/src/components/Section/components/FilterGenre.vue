@@ -74,7 +74,7 @@ export default defineComponent({
 .filter-genre-container__genre {
   padding: $padding / 2 $padding / 4;
   text-transform: capitalize;
-  margin-left: $margin;
+  margin-left: $margin * 1.2;
 }
 .filter-genre-container__arow {
   position: sticky;

@@ -2,21 +2,22 @@
   <div class="post-container">
     <figure class="post-content">
       <img
-        src="https://es.web.img2.acsta.net/pictures/18/04/19/11/20/0552856.jpg"
-        alt=""
+        :src="post.image"
+        :alt="post.title"
         class="post-content__img"
       />
       <figcaption class="post-information">
-        <h4 class="post-information__title">jurassic World El reino caido</h4>
+        <h4 class="post-information__title">{{ post.title }}</h4>
         <div class="post-detail">
-          <span class="post-detail__year">2018</span>
+          <span class="post-detail__year">{{ post.year }}</span>
           <div class="post-actions">
             <span class="post-detail__ico material-icons">favorite</span>
             <span class="post-detail__ico material-icons">visibility</span>
           </div>
           <div class="post-calification">
             <span class="post-calification__ico material-icons">star</span>
-            <span class="post-calification__label">1.1</span>
+            <span class="post-calification__label">{{ post.imDbRating }}
+            </span>
           </div>
         </div>
       </figcaption>
@@ -25,15 +26,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
+import { IMDBTitle } from "../shared/interfaces/IMDbTitle";
 
 export default defineComponent({
   name: "PostCard",
+  props: {
+    post: { type: Object as PropType<IMDBTitle> }
+  },
 });
 </script>
 
 <style lang="scss">
-@import "../../../main.scss";
+@import "../main.scss";
 
 .post-container {
   width: 160px;
@@ -96,3 +101,4 @@ export default defineComponent({
   margin-left: $margin / 4;
 }
 </style>
+
