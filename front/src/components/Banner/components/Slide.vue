@@ -47,17 +47,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount } from "vue";
+import { defineComponent, PropType } from "vue";
+import { IMDBTitle } from "../../../shared/interfaces/IMDbTitle";
 import Button from "../../Button.vue";
 
 export default defineComponent({
   name: "Slide",
   props: {
     mainClass: String,
-    product: {}
+    product: { type: Object as PropType<IMDBTitle>},
   },
   components: {
     Button,
+  },
+  setup(p) {
+
+    console.log(p)
   },
   computed: {
     generateMainClass() {

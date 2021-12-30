@@ -5,7 +5,7 @@
       <FilterGenre />
     </header>
     <div class="section-body-container">
-        <Carousel v-if="mountPostOnCarousel" :posts="data"/>
+        <Carousel v-if="mountPostOnCarousel" :posts="posts"/>
       <div class="section-body-container__post" v-else >
         <PostCard v-for="post in posts" :key="post" :post="post" />
       </div>
@@ -35,10 +35,6 @@ export default defineComponent({
     Carousel,
     PostCard
   },
-  data() {
-    const { navElements, posts, mountPostOnCarousel } = this;
-    return { navElements, posts, mountPostOnCarousel }
-  }
 });
 </script>
 

@@ -104,8 +104,8 @@ export default defineComponent({
     Banner,
     Section
   },
-  data() {
-        const navSectionOne: PropsNav[] = [
+  setup() {
+    const navSectionOne: PropsNav[] = [
       { icon: 'trending_up', label: 'Trends Now' },
       { icon: 'local_fire_department', label: 'Popular' },
       { icon: 'star', label: 'Premieres' },
@@ -119,8 +119,10 @@ export default defineComponent({
       { icon: 'search', label: 'Search' },
     ];
 
+    
+
     return { navSectionOne, navSectionTwo, dataSectionOne }
-  }
+  },
 });
 </script>
 
