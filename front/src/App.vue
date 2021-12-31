@@ -6,15 +6,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import Navbar from "./components/Navbar.vue";
-import Home from "./pages/Home.vue";
+import { defineComponent } from 'vue';
+import Navbar from './components/Navbar.vue';
+import Home from './pages/Home.vue';
 
+import { MovieRepository } from '../domain/Movie/MovieRespository';
+
+console.log(MovieRepository.getMovies());
 export default defineComponent({
-  name: "App",
+  name: 'App',
   components: {
     Navbar,
-    Home
+    Home,
   },
 });
 </script>

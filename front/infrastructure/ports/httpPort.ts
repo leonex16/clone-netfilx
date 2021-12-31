@@ -1,7 +1,10 @@
+export type HeadersInit = any;
+export type RequestInit = any;
+
 export type httpPortProps = {
   url: string,
   body?: any,
-  headers?: HeadersInit
+  headers?: HeadersInit,
 };
 
 export interface httpPort {

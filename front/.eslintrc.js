@@ -29,5 +29,6 @@ module.exports = {
     'import/no-unresolved': RULE.OFF,
     'import/extensions': RULE.OFF,
     'no-underscore-dangle': RULE.OFF,
+    'max-len': 160,
   },
 };

@@ -1,20 +1,16 @@
-import { IMovie } from "./IMovie";
+import { IMovie } from './IMovie';
+import { httpNativeAdapter as http } from '../../infrastructure/adapters/httpNativeAdapter';
+import { ITitleMovie } from '../../infrastructure/interfaces/ITitleMovie';
+import { ITopMovies, IItem } from '../../infrastructure/interfaces/ITopMovies';
 
-export class MovieRepository {
-  static getMovies(): any[] {
-    return [
-      {
-        id: 'tt0111161',
-        title: 'The Shawshank Redemption',
-        originalTitle: 'The Shawshank Redemption',
-        fullTitle: 'The Shawshank Redemption',
-        type: 'movie',
-        year: '1994',
-        image: 'https://m.media-amazon.com/images/M/MV5BODU4MjU4NjIwNl5BMl5BanBnXkFtZTgwMDU2MjEyMDE@._V1_SX300.jpg',
-        releaseDate: new Date('1994-10-14'),
-        runtimeMins: '142',
-        runtimeStr: '2h 22min',
-        plot: 'Two imprisoned'
-      },];
-  }
+import { TitleMovieMock } from '../../__mocks__/TitleMovieMock';
+// import { TopMoviesMock } from '../../__mocks__/TopMoviesMock';
+import { Movie } from './Movie';
+
+const getMovies = (): IMovie => {
+  return new Movie(TitleMovieMock)
+};
+
+export const MovieRepository = {
+  getMovies,
 }
