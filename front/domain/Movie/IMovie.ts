@@ -4,6 +4,8 @@ export enum Language {
   En = 'en',
 }
 
+export type MovieId = string;
+
 export interface CountryListElement {
   key: string;
   value: string;
@@ -65,7 +67,7 @@ export interface Trailer {
 }
 
 export interface IMovie {
-  // id: string;
+  id?: MovieId;
   title: string;
   originalTitle: string;
   fullTitle: string;

@@ -1,10 +1,8 @@
-import { generateUUID } from '../../infrastructure/uuid/uuid';
+import { Entity } from '../Entity';
 import {
-  CountryListElement, Images, IMovie, Similar, Trailer,
+  CountryListElement, Images, IMovie, MovieId, Similar, Trailer,
 } from './IMovie';
-
-export class Movie implements IMovie {
-  private _id: string;
+export class Movie extends Entity implements IMovie  {
 
   public title: string;
 
@@ -77,8 +75,9 @@ export class Movie implements IMovie {
   public errorMessage: string;
 
   constructor(movie: any) {
+    super();
     const m = this.toMovie(movie);
-    this._id = generateUUID(); // TODO: Implement UUID and use it instead of id
+    
     this.title = m.title;
     this.originalTitle = m.originalTitle;
     this.fullTitle = m.fullTitle;
@@ -116,50 +115,51 @@ export class Movie implements IMovie {
     this.errorMessage = m.errorMessage;
   }
 
-  get id(): string {
+  get id(): MovieId {
     return this.id;
   }
 
   // eslint-disable-next-line class-methods-use-this
   toMovie(data: any): IMovie {
+    const NO_INFORMATION = 'No Information';
     const m = typeof data === 'string' ? JSON.parse(data) : data;
 
     return {
-      title: m.title,
-      originalTitle: m.originalTitle,
-      fullTitle: m.fullTitle,
-      type: m.type,
-      year: m.year,
-      image: m.image,
-      releaseDate: m.releaseDate,
-      runtimeMins: m.runtimeMins,
-      runtimeStr: m.runtimeStr,
-      plot: m.plot,
-      plotLocal: m.plotLocal,
-      plotLocalIsRtl: m.plotLocalIsRtl,
-      awards: m.awards,
-      directors: m.directors,
-      writers: m.writers,
-      stars: m.stars,
-      genres: m.genres,
-      genreList: m.genreList,
-      companies: m.companies,
-      countries: m.countries,
-      countryList: m.countryList,
-      languages: m.languages,
-      languageList: m.languageList,
-      contentRating: m.contentRating,
-      imDbRating: m.imDbRating,
-      imDbRatingVotes: m.imDbRatingVotes,
-      metacriticRating: m.metacriticRating,
-      posters: m.posters,
-      images: m.images,
-      trailer: m.trailer,
-      tagline: m.tagline,
-      keywords: m.keywords,
-      keywordList: m.keywordList,
-      similars: m.similars,
-      errorMessage: m.errorMessage,
+      title: m.title ?? NO_INFORMATION, // REQUIRED
+      originalTitle: m.originalTitle ?? NO_INFORMATION,
+      fullTitle: m.fullTitle ?? NO_INFORMATION,
+      type: m.type ?? NO_INFORMATION,
+      year: m.year ?? NO_INFORMATION,
+      image: m.image ?? NO_INFORMATION, // REQUIRED
+      releaseDate: m.releaseDate ?? NO_INFORMATION,
+      runtimeMins: m.runtimeMins ?? NO_INFORMATION,
+      runtimeStr: m.runtimeStr ?? NO_INFORMATION, // REQUIRED
+      plot: m.plot ?? NO_INFORMATION, // REQUIRED
+      plotLocal: m.plotLocal ?? NO_INFORMATION,
+      plotLocalIsRtl: m.plotLocalIsRtl ?? NO_INFORMATION,
+      awards: m.awards ?? NO_INFORMATION,
+      directors: m.directors ?? NO_INFORMATION,
+      writers: m.writers ?? NO_INFORMATION,
+      stars: m.stars ?? NO_INFORMATION,
+      genres: m.genres ?? NO_INFORMATION,
+      genreList: m.genreList ?? NO_INFORMATION,
+      companies: m.companies ?? NO_INFORMATION,
+      countries: m.countries ?? NO_INFORMATION,
+      countryList: m.countryList ?? NO_INFORMATION,
+      languages: m.languages ?? NO_INFORMATION,
+      languageList: m.languageList ?? NO_INFORMATION,
+      contentRating: m.contentRating ?? NO_INFORMATION,
+      imDbRating: m.imDbRating ?? NO_INFORMATION, // REQUIRED
+      imDbRatingVotes: m.imDbRatingVotes ?? NO_INFORMATION,
+      metacriticRating: m.metacriticRating ?? NO_INFORMATION,
+      posters: m.posters ?? NO_INFORMATION, // REQUIRED
+      images: m.images ?? NO_INFORMATION,
+      trailer: m.trailer ?? NO_INFORMATION,
+      tagline: m.tagline ?? NO_INFORMATION,
+      keywords: m.keywords ?? NO_INFORMATION,
+      keywordList: m.keywordList ?? NO_INFORMATION,
+      similars: m.similars ?? NO_INFORMATION,
+      errorMessage: m.errorMessage ?? NO_INFORMATION,
     };
   }
 }

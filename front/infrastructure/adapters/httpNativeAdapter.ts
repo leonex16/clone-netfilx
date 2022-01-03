@@ -10,7 +10,7 @@ const HEADERS: HeadersInit = {
   Accept: 'application/json',
 };
 
-function _buildOptions(method?: methods, headers?: HeadersInit, body?: any): RequestInit {
+const _buildOptions = (method?: methods, headers?: HeadersInit, body?: any): RequestInit => {
   const options: RequestInit = {
     method: method ?? METHOD,
     headers: headers ?? HEADERS,
@@ -21,29 +21,33 @@ function _buildOptions(method?: methods, headers?: HeadersInit, body?: any): Req
   return options;
 }
 
+const _get = async <T>({ url, headers }: httpPortProps): Promise<T> => {
+  const response: Response = await fetch(url);
+  const json = await response.json();
+  return json as T;
+};
+
+const _post = async <T>({ url, body, headers }: httpPortProps): Promise<T> => {
+  const response: Response = await fetch(url, _buildOptions('POST', headers, body));
+  const json = await response.json();
+  return json as T;
+};
+
+const _put = async <T>({ url, body, headers }: httpPortProps): Promise<T> => {
+  const response: Response = await fetch(url, _buildOptions('PUT', headers, body));
+  const json = await response.json();
+  return json as T;
+};
+
+const _delete = async <T>({ url, headers }: httpPortProps): Promise<T> => {
+  const response: Response = await fetch(url, _buildOptions('DELETE', headers, null));
+  const json = await response.json();
+  return json as T;
+};
+
 export const httpNativeAdapter: httpPort = {
-  async get<T>({ url, headers }: httpPortProps): Promise<T> {
-    const response: Response = await fetch(url);
-    const json = await response.json();
-    return json as T;
-  },
-
-  async post<T>({ url, body, headers }: httpPortProps): Promise<T> {
-    const response: Response = await fetch(url, _buildOptions('POST', headers, body));
-    const json = await response.json();
-    return json as T;
-  },
-
-  async put<T>({ url, body, headers }: httpPortProps): Promise<T> {
-    const response: Response = await fetch(url, _buildOptions('PUT', headers, body));
-    const json = await response.json();
-    return json as T;
-  },
-
-  async delete<T>({ url, headers }: httpPortProps): Promise<T> {
-    const response: Response = await fetch(url, _buildOptions('DELETE', headers, null));
-    const json = await response.json();
-    return json as T;
-  },
-
+  get: _get,
+  post: _post,
+  put: _put,
+  delete: _delete,
 };
