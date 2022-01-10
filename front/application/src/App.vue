@@ -1,8 +1,8 @@
 <template>
-  <article class="app-container">
+  <main>
     <Navbar />
     <Home />
-  </article>
+  </main>
 </template>
 
 <script lang="ts">
@@ -18,14 +18,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="scss">
-@import "./main.scss";
-
-.app-container {
-  background-color: $primary-500;
-  min-height: 100vh;
-  max-width: 100vw;
-  min-width: 100vw;
-}
-</style>

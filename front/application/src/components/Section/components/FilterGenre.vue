@@ -8,8 +8,9 @@
       :key="genre.genreId"
       :buttonText="genre.genreDesc"
       :toggleBtn="true"
-      activeClass="btn-secondary--active"
+      activeClass="filter-genre-container__genre--active"
       customClass="filter-genre-container__genre btn-primary--400"
+      @click="handleClickGenre"
     />
     <span class="filter-genre-container__arow material-icons" role="move_right"
       >chevron_right</span
@@ -23,10 +24,13 @@ import Button from "../../Button.vue";
 
 export default defineComponent({
   name: "FilterGenre",
+  props: {
+    sectionId: String,
+  },
   components: {
     Button,
   },
-  data() {
+  setup(props) {
     const genres = [
       { genreId: "Action", genreDesc: "Action" },
       { genreId: "Adventure", genreDesc: "Adventure" },
@@ -54,7 +58,88 @@ export default defineComponent({
       { genreId: "Western", genreDesc: "Western" },
     ];
 
-    return { genres };
+    const genresActive: string[] = [];
+
+    function handleClickGenre(evt: PointerEvent) {
+      const $self = evt.target as HTMLButtonElement;
+      const genre = $self.textContent!.toLowerCase();
+      const $posts = getPostsOfFilter();
+
+      managementGenres(genre);
+      filterPosts($posts);
+
+      const areHidden = areAllPostHidden($posts);
+      showNotFoundIcon(areHidden);
+    }
+
+    function managementGenres(genre: string) {
+      const index = genresActive.indexOf(genre);
+      index === -1 ? genresActive.push(genre) : genresActive.splice(index, 1);
+    }
+
+    function getPostsOfFilter(): NodeListOf<HTMLDivElement> {
+      return document.querySelectorAll(
+        `div#${props.sectionId}.section-body-container div[role="post"]`
+      );
+    }
+
+    function transition(
+      $el: HTMLElement,
+      addClass: string,
+      removeClass: string
+    ) {
+      $el.classList.remove(removeClass);
+      $el.classList.add(addClass);
+
+      setTimeout(() => {
+        const isVisible = addClass === "animate__fadeIn";
+        $el.style.display = isVisible ? "block" : "none";
+      }, 200);
+    }
+
+    function getGenreListOfPosts($post: HTMLDivElement): string[] {
+      const genresListRaw = $post.dataset?.genreList;
+      const genresList = genresListRaw?.split(",") ?? [];
+      return genresList.map((genre) => genre.toLowerCase());
+    }
+
+    function areAllPostHidden($posts: NodeListOf<HTMLDivElement>) {
+      return (
+        Array.from($posts).some((post) =>
+          post.classList.contains("animate__fadeIn")
+        ) === false
+      );
+    }
+
+    function showNotFoundIcon(areHidden: boolean) {
+      const $notFoundIcon = document.getElementById(`${props.sectionId}-no-movie`)!;
+
+      areHidden
+        ? transition($notFoundIcon, "animate__fadeIn", "animate__fadeOut")
+        : transition($notFoundIcon, "animate__fadeOut", "animate__fadeIn")
+    }
+
+    function filterPosts($posts: NodeListOf<HTMLDivElement>): void {
+      $posts?.forEach(($post) => {
+        // GENRES ACTIVE EMPTY
+        if (genresActive.length === 0) {
+          transition($post, "animate__fadeIn", "animate__fadeOut");
+          return;
+        }
+
+        const genreList = getGenreListOfPosts($post);
+        const isMatch = genresActive.some((genre) =>
+          genreList.includes(genre.toLowerCase())
+        );
+
+        isMatch
+          ? transition($post, "animate__fadeIn", "animate__fadeOut")
+          : transition($post, "animate__fadeOut", "animate__fadeIn");
+
+      });
+    }
+
+    return { genres, handleClickGenre };
   },
 });
 </script>
@@ -74,9 +159,29 @@ export default defineComponent({
   }
 }
 .filter-genre-container__genre {
-  padding: $padding / 2 $padding / 4;
+  position: relative;
+  padding: 0 $padding / 4;
   text-transform: capitalize;
   margin-left: $margin * 1.2;
+
+  &--active {
+    border: 2px solid $secondary-500;
+
+    & > span {
+      margin-right: 1rem;
+    }
+
+    &::after{
+      content: "x";
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: lowercase;
+      color: $text-color-primary;
+    }
+  }
 }
 .filter-genre-container__arow {
   position: sticky;
@@ -103,5 +208,9 @@ export default defineComponent({
   &:active {
     color: $text-color-primary--active;
   }
+}
+
+.filter-post--hiiden {
+  display: none;
 }
 </style>

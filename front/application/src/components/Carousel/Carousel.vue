@@ -1,9 +1,15 @@
 <template>
   <div class="carousel-container">
     <div class="carousel-content">
-      <span class="carousel-content-left material-icons" role="prev-post">chevron_left</span>
-      <PostCard v-for="(post, i) in posts" :key="i" :post="post" />
-      <span class="carousel-content-right material-icons" role="next-post">chevron_right</span>
+      <span class="carousel-content__left material-icons" role="prev-post"
+        >chevron_left</span
+      >
+      <div class="carousel-content__posts">
+        <PostCard v-for="(post, i) in posts" :key="i" :post="post" />
+      </div>
+      <span class="carousel-content__right material-icons" role="next-post"
+        >chevron_right</span
+      >
     </div>
   </div>
 </template>
@@ -14,18 +20,19 @@ import PostCard from "../PostCard.vue";
 import { IMDBTitle } from "../../shared/interfaces/IMDbTitle";
 
 export default defineComponent({
-  name: 'Carousel',
+  name: "Carousel",
   props: {
-    posts: { type: Object as PropType<IMDBTitle[]> }
+    posts: { type: Object as PropType<IMDBTitle[]> },
+    sectionId: String,
   },
   components: {
-    PostCard
-  }
-})
+    PostCard,
+  },
+});
 </script>
 
 <style lang="scss">
-@import '../../main.scss';
+@import "../../main.scss";
 
 .carousel-container {
   position: relative;
@@ -35,7 +42,7 @@ export default defineComponent({
   display: flex;
   max-width: $max-width-container + 80px;
   position: relative;
-  margin: auto;  
+  margin: auto;
   overflow-x: scroll;
   // background: yellow;
 
@@ -46,12 +53,21 @@ export default defineComponent({
     display: none;
   }
 }
-.carousel-content-left,
-.carousel-content-right {
+.carousel-content__left {
+  left: 0;
+  box-shadow: 10px 0 25px 45px $primary-500;
+}
+.carousel-content__right {
+  right: 0;
+  box-shadow: -10px 0 25px 45px $primary-500;
+}
+.carousel-content__left,
+.carousel-content__right {
   display: flex;
   align-items: center;
   justify-content: center;
   position: sticky;
+  z-index: 1;
 
   background-color: $primary-500;
   color: $text-color-primary;
@@ -64,15 +80,12 @@ export default defineComponent({
   &:active {
     color: $text-color-primary--active;
   }
-
 }
-.carousel-content-left {
-  left: 0;
-  box-shadow: 10px 0 25px 45px $primary-500;
-}
-.carousel-content-right {
-  right: 0;
-  box-shadow: -10px 0 25px 45px $primary-500;
-
+.carousel-content__posts {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  gap: $margin * 2;
+  min-height: 335px; // HEIGHT OF POST CARD 
 }
 </style>

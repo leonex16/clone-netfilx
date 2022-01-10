@@ -46,8 +46,8 @@ export default defineComponent({
         const hasSibling = $slideActive?.nextElementSibling;
 
         hasSibling && indxAcive !== -1
-          ? slides[indxAcive + 1].classList.remove("slide-container--hidden")
-          : slides[0].classList.remove("slide-container--hidden");
+          ? slides[indxAcive + 1]?.classList?.remove("slide-container--hidden")
+          : slides[0]?.classList?.remove("slide-container--hidden");
 
         $slideActive?.classList?.add("slide-container--hidden");
       }, 5000);

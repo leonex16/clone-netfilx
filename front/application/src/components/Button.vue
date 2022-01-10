@@ -8,22 +8,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-enum Status {
-  default = "default",
-  disabled = "disabled",
-  active = "active",
-}
-
-type ButtonProps = {
-  customClass: String;
-  disabledClass: String;
-  activeClass: String;
-  iconText: String;
-  buttonText: String;
-  toggleBtn: Boolean;
-  status: Status;
-};
-
 export default defineComponent({
   name: "Button",
   props: {
@@ -41,7 +25,6 @@ export default defineComponent({
 
     const handleClickBtn = (evt: PointerEvent) => {
       const $self = evt.target as HTMLButtonElement;
-      console.log($self)
       $self.classList.toggle(props.activeClass);
     };
 

@@ -1,6 +1,14 @@
 <template>
-    <div class="post-container">
-  <router-link :to="{ name: 'movie', params: { id: 'id', name: post.title}}" >
+  <div
+    class="post-container animate__animated animate__faster"
+    :data-genre-list="
+      Math.round(Math.random()) === 0 ? 'action,animation' : 'biography,comedy'
+    "
+    role="post"
+  >
+    <router-link
+      :to="{ name: 'movie', params: { id: 'id', name: post.title } }"
+    >
       <figure class="post-content">
         <img
           :src="removeWhiteSpaces(post.image)"
@@ -28,8 +36,8 @@
           </div>
         </figcaption>
       </figure>
-  </router-link>
-    </div>
+    </router-link>
+  </div>
 </template>
 
 <script lang="ts">
@@ -101,6 +109,11 @@ export default defineComponent({
   height: 280px;
   border-radius: 5px;
   object-fit: cover;
+    transition: transform 200ms linear;
+  
+  &:hover {
+    transform: scale(1.5);
+  }
 }
 .post-information {
 }
