@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import PostCard from "../PostCard.vue";
+import PostCard from "../PostCard/PostCard.vue";
 import { IMDBTitle } from "../../shared/interfaces/IMDbTitle";
 
 export default defineComponent({

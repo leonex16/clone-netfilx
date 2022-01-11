@@ -30,7 +30,7 @@
 import { defineComponent, PropType } from "vue";
 import { PropsNav } from "../../shared/interfaces/Props";
 import { IMDBTitle } from "../../shared/interfaces/IMDbTitle";
-import PostCard from "../PostCard.vue";
+import PostCard from "../PostCard/PostCard.vue";
 import Nav from "./components/Nav.vue";
 import Carousel from "../Carousel/Carousel.vue";
 import FilterGenre from "./components/FilterGenre.vue";

@@ -19,6 +19,7 @@
           onload="this.nextElementSibling.classList.add('post-content__loader--hidden')"
         />
         <div class="post-content__loader"></div>
+        <PostCardSummary :summary="PostCardSummary" />
         <figcaption class="post-information">
           <h4 class="post-information__title">{{ post.title }}</h4>
           <div class="post-detail">
@@ -42,7 +43,8 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { IMDBTitle } from "../shared/interfaces/IMDbTitle";
+import PostCardSummary from "./components/PostCardSummary.vue";
+import { IMDBTitle } from "../../shared/interfaces/IMDbTitle";
 import imgDefault from "@/assets/no-image.png";
 
 export default defineComponent({
@@ -50,8 +52,19 @@ export default defineComponent({
   props: {
     post: { type: Object as PropType<IMDBTitle> },
   },
-  setup() {
+  components: {
+    PostCardSummary,
+  },
+  setup(props) {
     // https://via.placeholder.com/150x250/1f1f1f/FFFFFF?text=No+Image+Available
+    const { title, runtimeStr, plot } = props.post as any;
+
+    const PostCardSummary = {
+      title: title,
+      runtimeStr: runtimeStr,
+      plot: plot,
+      url: title,
+    };
 
     const removeWhiteSpaces = (str: string) => str.replace(/\s/g, "");
 
@@ -59,6 +72,7 @@ export default defineComponent({
       self.classList.add("post-content__loader--hidden");
 
     return {
+      PostCardSummary,
       imgDefault,
       removeWhiteSpaces,
       loadedImage,
@@ -68,7 +82,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import "../main.scss";
+@import "../../main.scss";
 
 .post-container {
   position: relative;
@@ -109,10 +123,11 @@ export default defineComponent({
   height: 280px;
   border-radius: 5px;
   object-fit: cover;
-    transition: transform 200ms linear;
-  
+  transition: transform 200ms linear 500ms, filter 200ms linear 500ms;
+
   &:hover {
-    transform: scale(1.5);
+    transform: scale(1.2);
+    filter: blur(4px) brightness(0.5);
   }
 }
 .post-information {
