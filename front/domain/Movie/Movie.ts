@@ -121,7 +121,7 @@ export class Movie extends Entity implements IMovie  {
 
   // eslint-disable-next-line class-methods-use-this
   toMovie(data: any): IMovie {
-    const NO_INFORMATION = 'No Information';
+    const NO_INFORMATION = null;
     const m = typeof data === 'string' ? JSON.parse(data) : data;
 
     return {

@@ -137,5 +137,7 @@ export default defineComponent({
 </script>
 
 <style>
-
+.main-container {
+  background-color: transparent;
+}
 </style>

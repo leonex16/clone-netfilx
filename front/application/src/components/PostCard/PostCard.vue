@@ -7,7 +7,7 @@
     role="post"
   >
     <router-link
-      :to="{ name: 'movie', params: { id: 'id', name: post.title } }"
+      :to="{ name: 'movie', params: { id: 'id', name: createURIPost(post.title) } }"
     >
       <figure class="post-content">
         <img
@@ -68,14 +68,14 @@ export default defineComponent({
 
     const removeWhiteSpaces = (str: string) => str.replace(/\s/g, "");
 
-    const loadedImage = (self: HTMLImageElement) =>
-      self.classList.add("post-content__loader--hidden");
+    const createURIPost = (title: string) =>
+      encodeURIComponent(title).toLowerCase();
 
     return {
       PostCardSummary,
       imgDefault,
       removeWhiteSpaces,
-      loadedImage,
+      createURIPost,
     };
   },
 });
@@ -127,7 +127,12 @@ export default defineComponent({
 
   &:hover {
     transform: scale(1.2);
-    filter: blur(4px) brightness(0.5);
+    filter: blur(6px) brightness(0.5);
+
+    & ~ .post-summary {
+      visibility: visible;
+      opacity: 1;
+    }
   }
 }
 .post-information {
