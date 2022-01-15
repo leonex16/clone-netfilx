@@ -55,11 +55,11 @@ export default defineComponent({
 }
 .carousel-content__left {
   left: 0;
-  box-shadow: 10px 0 25px 45px $primary-500;
+  box-shadow: 10px 0 25px 45px $primary-800;
 }
 .carousel-content__right {
   right: 0;
-  box-shadow: -10px 0 25px 45px $primary-500;
+  box-shadow: -10px 0 25px 45px $primary-800;
 }
 .carousel-content__left,
 .carousel-content__right {
@@ -69,7 +69,7 @@ export default defineComponent({
   position: sticky;
   z-index: 1;
 
-  background-color: $primary-500;
+  background-color: $primary-800;
   color: $text-color-primary;
   cursor: pointer;
   font-size: 2.8rem;

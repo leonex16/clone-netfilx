@@ -191,7 +191,7 @@ export default defineComponent({
   font-size: 2.5rem;
   width: 50px;
   text-align: center;
-  background-color: $primary-500;
+  background-color: $primary-800;
   @include transition(color);
 
   &[role="move_left"] {

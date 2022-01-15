@@ -19,9 +19,14 @@
       <div class="section-body-container__carousel" v-if="mountPostOnCarousel">
         <Carousel :sectionId="sectionId" :posts="posts" />
       </div>
-      <div class="section-body-container__posts" v-else>
-        <PostCard v-for="post in posts" :key="post" :post="post" />
-      </div>
+      <section class="section-body-container" v-else>
+        <header class="section-body-container__sub-filter">
+        <FilterCalification />
+        </header>
+          <div class="section-body-container__posts">
+            <PostCard v-for="post in posts" :key="post" :post="post" />
+          </div>
+      </section>
     </div>
   </section>
 </template>
@@ -34,6 +39,7 @@ import PostCard from "../PostCard/PostCard.vue";
 import Nav from "./components/Nav.vue";
 import Carousel from "../Carousel/Carousel.vue";
 import FilterGenre from "./components/FilterGenre.vue";
+import FilterCalification from "./components/FilterCalification.vue";
 
 export default defineComponent({
   name: "Section",
@@ -47,6 +53,7 @@ export default defineComponent({
     FilterGenre,
     Carousel,
     PostCard,
+    FilterCalification,
   },
   setup() {
     return {
@@ -95,7 +102,7 @@ export default defineComponent({
 
 .section-body-container__posts {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 2rem;
   max-width: 100%;
   margin: auto;

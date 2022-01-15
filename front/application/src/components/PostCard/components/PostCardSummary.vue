@@ -60,7 +60,7 @@ export default defineComponent({
   flex-direction: column;
   height: calc(280px * 1.2); // Scale PostCard
   width: calc(100% * 1.2); // Scale PostCard
-  padding: 0.5rem;
+  padding: 0.5rem 0.8rem 1rem;
 
   border-radius: 5px;
   pointer-events: none;

@@ -69,7 +69,12 @@ export default defineComponent({
     const removeWhiteSpaces = (str: string) => str.replace(/\s/g, "");
 
     const createURIPost = (title: string) =>
-      encodeURIComponent(title).toLowerCase();
+      title
+      .trim()
+      .replace(/-+/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/:/g, '')
+      .toLowerCase();
 
     return {
       PostCardSummary,
