@@ -7,7 +7,11 @@
     role="post"
   >
     <router-link
-      :to="{ name: 'movie', params: { id: 'id', name: createURIPost(post.title) } }"
+      :to="{
+        name: 'movie',
+        params: { name: createURIPost(post.title) },
+      }"
+
     >
       <figure class="post-content">
         <img
@@ -59,22 +63,22 @@ export default defineComponent({
     // https://via.placeholder.com/150x250/1f1f1f/FFFFFF?text=No+Image+Available
     const { title, runtimeStr, plot } = props.post as any;
 
-    const PostCardSummary = {
-      title: title,
-      runtimeStr: runtimeStr,
-      plot: plot,
-      url: title,
-    };
-
     const removeWhiteSpaces = (str: string) => str.replace(/\s/g, "");
 
     const createURIPost = (title: string) =>
       title
-      .trim()
-      .replace(/-+/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/:/g, '')
-      .toLowerCase();
+        .trim()
+        .replace(/-+/g, "")
+        .replace(/\s+/g, "-")
+        .replace(/:/g, "")
+        .toLowerCase();
+
+    const PostCardSummary = {
+      title: title,
+      runtimeStr: runtimeStr,
+      plot: plot,
+      url: createURIPost(title),
+    };
 
     return {
       PostCardSummary,

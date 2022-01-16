@@ -5,6 +5,6 @@ import App from "./App.vue";
 
 import "./main.scss";
 
-createApp(App)
-.use(router)
-.mount("#app");
+const app = createApp(App).use(router);
+
+app.mount("#app");

@@ -6,8 +6,19 @@
       <p class="post-summary__duration">{{ summary.runtimeStr }}</p>
     </header>
     <div class="post-summary__content">
-      <p class="post-summary__plot">{{ summary.plot || 'ESTO ES UN TEXTO MUY LARGO, PERO DEMASIADO LARGO PAR ALO QUE BUSCA , PLATANO' }}</p>
-      <router-link to="/post/{ url }" class="post-summary__btn">
+      <p class="post-summary__plot">
+        {{
+          summary.plot ||
+          "ESTO ES UN TEXTO MUY LARGO, PERO DEMASIADO LARGO PAR ALO QUE BUSCA , PLATANO"
+        }}
+      </p>
+      <router-link
+        :to="{
+          name: 'movie',
+          params: { name: summary.url },
+        }"
+        class="post-summary__btn"
+      >
         <Button
           buttonText="WATCH"
           customClass="btn-secondary btn-secondary--shadow post-summary__btn"
@@ -43,7 +54,7 @@ export default defineComponent({
     Button,
   },
   setup() {
-    return { };
+    return {};
   },
 });
 </script>
@@ -75,7 +86,7 @@ export default defineComponent({
 
 .post-summary__header {
   display: flex;
-  color: #FFF;
+  color: #fff;
   margin: $margin auto;
 }
 
@@ -100,7 +111,7 @@ export default defineComponent({
 }
 
 .post-summary__plot {
-  color: #FFF;
+  color: #fff;
   font-size: 14px;
 }
 
@@ -113,7 +124,7 @@ export default defineComponent({
 .post-summary__footer {
   display: flex;
   justify-content: space-around;
-  color: #FFF;
+  color: #fff;
 }
 
 .post-summary__ico {
